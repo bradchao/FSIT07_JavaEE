@@ -16,8 +16,21 @@ public class Brad03 extends HttpServlet {
 		String account = request.getParameter("account");
 		String passwd = request.getParameter("passwd");
 		String gender = request.getParameter("gender");
+		//String like = request.getParameter("like");
+		String area = request.getParameter("area");
+		String memo = request.getParameter("memo");
 		
-		System.out.println(account + ":" + passwd + ":" + gender);
+		System.out.println(account + ":" + passwd 
+				+ ":" + gender + ":" + area + ":" + memo);
+		String[] likes = request.getParameterValues("like");
+		if (likes != null) {
+			for (String like : likes) {
+				System.out.println(like);
+			}
+		}
+		
+		
+		
 	}
 
 }
