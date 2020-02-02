@@ -23,9 +23,10 @@ public class Brad07 extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		File uploadDir = 
-				new File("C:\\Users\\user\\git\\repository\\Brad\\WebContent\\upload");
 
+		String prefix = request.getParameter("prefix");
+		System.out.println(prefix);
+		
 		// enctype="multipart/form-data"
 		// MUST BE => @MultipartConfig 
 		Collection<Part> parts = request.getParts();
@@ -35,22 +36,22 @@ public class Brad07 extends HttpServlet {
 			
 			String name = part.getName();
 			String sname = part.getSubmittedFileName();
-			//System.out.println(name + ":" + sname);
 			
-			if (sname.length() == 0) continue;
-			
-			part.write(createFileName(i++));
+			if (name.equals("upload")) {
+				if (sname.length() == 0) continue;
+				part.write(createFileName(prefix, i++));
+			}
 			
 		}
 	
 	}
 	
-	private String createFileName(int i) {
+	private String createFileName(String fname, int i) {
 		Calendar now = Calendar.getInstance();
 		int year = now.get(Calendar.YEAR);
 		int month = now.get(Calendar.DAY_OF_MONTH)+1;
 		int day = now.get(Calendar.DAY_OF_MONTH);
-		return "F" + year+"_"+month+"_"+day+"_"+i+".jpg";
+		return fname + year+"_"+month+"_"+day+"_"+i+".jpg";
 	}
 
 }
