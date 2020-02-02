@@ -22,17 +22,24 @@ public class Brad17 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		String x = request.getParameter("x");
+		String op = request.getParameter("op");
 		String y = request.getParameter("y");
 		String result = request.getParameter("result");
+		String filename = request.getParameter("filename");
 		
-		String html = loadView();
-		out.print(String.format(html, x,y,result));
+		String op1 = op.equals("1")?"selected":"";
+		String op2 = op.equals("2")?"selected":"";
+		String op3 = op.equals("3")?"selected":"";
+		String op4 = op.equals("4")?"selected":"";
+		
+		String html = loadView(filename);
+		out.print(String.format(html, x,op1,op2,op3,op4,y,result));
 		response.flushBuffer();
 		
 		
 	}
 	
-	private String loadView() {
+	private String loadView(String fname) {
 		ServletContext context = getServletContext();
 		String viewPath = context.getInitParameter("viewPath");
 		
@@ -40,7 +47,7 @@ public class Brad17 extends HttpServlet {
 		try {
 			BufferedReader reader = 
 				new BufferedReader(new FileReader(
-						new File(viewPath, "view2.html")));
+						new File(viewPath, fname)));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
