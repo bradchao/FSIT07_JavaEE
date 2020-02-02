@@ -35,6 +35,8 @@ public class Brad10 extends HttpServlet {
 			}catch(Exception e) {}
 		}
 		
+		if (op == null) op = "1";
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
@@ -43,10 +45,10 @@ public class Brad10 extends HttpServlet {
 		.append("<form action='Brad10' method='get'>")
 		.append("<input type='text' name='x' value='" + intX + "'>")
 		.append("<select name='op'>")
-		.append("<option value='1'>+</option>")
-		.append("<option value='2'>-</option>")
-		.append("<option value='3'>x</option>")
-		.append("<option value='4'>/</option>")
+		.append("<option value='1' " + (op.equals("1")?"selected":"")  + ">+</option>")
+		.append("<option value='2' " + (op.equals("2")?"selected":"") + ">-</option>")
+		.append("<option value='3' " + (op.equals("3")?"selected":"") + ">x</option>")
+		.append("<option value='4' " + (op.equals("4")?"selected":"") + ">/</option>")
 		.append("</select>")
 		.append("<input type='text' name='y' value='" + intY + "'>")
 		.append("<input type='submit' value='=' />")
