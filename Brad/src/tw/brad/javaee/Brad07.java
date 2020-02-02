@@ -34,11 +34,15 @@ public class Brad07 extends HttpServlet {
 		int i=1;
 		for (Part part : parts) {
 			
+			String type = part.getContentType();
+			
 			String name = part.getName();
 			String sname = part.getSubmittedFileName();
 			
 			if (name.equals("upload")) {
 				if (sname.length() == 0) continue;
+				
+				System.out.println(sname + ":" + type);
 				part.write(createFileName(prefix, i++));
 			}
 			
