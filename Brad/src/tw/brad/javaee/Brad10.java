@@ -16,14 +16,22 @@ public class Brad10 extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String x = request.getParameter("x");
 		String y = request.getParameter("y");
-		int intX, intY, result; 
+		String op = request.getParameter("op");
+		int intX, intY; 
+		double result; 
 		result = intX = intY = 0;
 		
 		if (x != null) {
 			try {
 				intX = Integer.parseInt(x);
 				intY = Integer.parseInt(y);
-				result = intX + intY;
+				switch(op) {
+					case "1": result = intX + intY; break;
+					case "2": result = intX - intY; break;
+					case "3": result = intX * intY; break;
+					case "4": result = intX*1.0 / intY; break;
+				}
+				
 			}catch(Exception e) {}
 		}
 		
@@ -34,11 +42,11 @@ public class Brad10 extends HttpServlet {
 		.append("<hr />")
 		.append("<form action='Brad10' method='get'>")
 		.append("<input type='text' name='x' value='" + intX + "'>")
-		.append("<select>")
-		.append("<option>+</option>")
-		.append("<option>-</option>")
-		.append("<option>x</option>")
-		.append("<option>/</option>")
+		.append("<select name='op'>")
+		.append("<option value='1'>+</option>")
+		.append("<option value='2'>-</option>")
+		.append("<option value='3'>x</option>")
+		.append("<option value='4'>/</option>")
 		.append("</select>")
 		.append("<input type='text' name='y' value='" + intY + "'>")
 		.append("<input type='submit' value='=' />")
