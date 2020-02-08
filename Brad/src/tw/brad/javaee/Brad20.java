@@ -57,9 +57,9 @@ public class Brad20 extends HttpServlet {
 		
 		boolean isAccountOK = checkAccount(account, passwd);
 		if (isAccountOK) {
-			out.println("OK");
+			response.sendRedirect("main.html");
 		}else {
-			out.println("ERR");
+			response.sendRedirect("brad07.html");
 		}
 		
 	}
