@@ -51,14 +51,17 @@ public class Brad20 extends HttpServlet {
 		String passwd = request.getParameter("passwd");
 		
 		if (account == null || !isMysqlOK) {
+			//out.print("debug0");
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Server Busy!");
 			return;
 		}
 		
 		boolean isAccountOK = checkAccount(account, passwd);
 		if (isAccountOK) {
+			//out.print("debug1");
 			response.sendRedirect("main.html");
 		}else {
+			//out.print("debug2");
 			response.sendRedirect("brad07.html");
 		}
 		
@@ -70,11 +73,14 @@ public class Brad20 extends HttpServlet {
 			pstmt.setString(1, account);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
+				System.out.println("debug3");
 				String hashPW = rs.getString("passwd");
 				isPWOK = BradAPIs.chPassword(passwd, hashPW);
+			}else {
+				System.out.println("debug4");
 			}
 		}catch(Exception e) {
-			
+			System.out.println("debug5:" + e.toString());
 		}
 		return isPWOK;
 	}
