@@ -31,4 +31,8 @@ public class BradAPI {
 		
 		return ret;
 	}
+	
+	public static int toIntScore() {
+		return (int)(Math.random()*101);
+	}
 }

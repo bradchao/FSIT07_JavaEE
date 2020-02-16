@@ -17,7 +17,7 @@ public class Member {
 	
 	// getter & setter
 	public String getAccount() {
-		return " ==> " + this.account;
+		return this.account;
 	}
 	public String getRealname() {
 		return this.realname;
@@ -26,7 +26,7 @@ public class Member {
 		return this.age;
 	}
 	public void setAccount(String account) {
-		this.account = "***" + account;
+		this.account = account;
 	}
 	public void setRealname(String realname) {
 		this.realname = realname;
