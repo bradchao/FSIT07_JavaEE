@@ -1,3 +1,4 @@
+<%@page import="tw.brad.beans.Member"%>
 <%@page import="tw.brad.myutils.BradAPI"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,6 +17,14 @@
 	HashMap<String,String> map = new HashMap<>();
 	map.put("k1", "v1");map.put("k2", "v2");map.put("k3", "v3");
 	request.setAttribute("map", map);
+	
+	Member member = new Member();
+	member.setAccount("brad");
+	member.setAge(18);
+	member.setRealname("Brad Chao");
+	request.setAttribute("member", member);
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -38,7 +47,13 @@ Lottery1: <%= BradAPI.createLottery() %><br>
 Lottery2: ${BradAPI.createLottery() }<br>
 random: ${Math.random() }<br>
 Hello: ${BradAPI.sayHello(param.name) }<br>
-
+${10 + 3 }<br>
+${param.x } > ${param.y } => ${param.x > param.y }<br><!-- "10" > "3"  -->
+${(param.x == "10")?"Yes":"No" }<br>
+${10 > 3 }<br>
+Account: ${member.account }<br>	<!--  member.getAccount() -->
+Age:${member.account }<br>
+Realname:${member.realname }<br>
 
 </body>
 </html>
