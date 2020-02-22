@@ -8,7 +8,7 @@
 	user="root"
 	password="root"
 	/>
-<sql:query var="rs1">
+<sql:query var="result">
 SELECT * FROM opendata
 </sql:query>
 <!DOCTYPE html>
@@ -18,14 +18,27 @@ SELECT * FROM opendata
 <title>Insert title here</title>
 </head>
 <body>
-
+總筆數: ${result.rowCount }
+<hr >
 <table border="1" width="100%">
 	<tr>
+		<th>Id</th>
 		<th>Name</th>
 		<th>Address</th>
 		<th>Tel</th>
 		<th>LatLng</th>
+		<th>Picture</th>
 	</tr>
+	<c:forEach items="${result.rows }" var="row">
+		<tr>
+			<td>${row.id }</td>
+			<td>${row.cname }</td>
+			<td>${row.address }</td>
+			<td>${row.tel }</td>
+			<td>${row.latlng }</td>
+			<td><img src="${row.picurl }" width="128px" height="72px"></td>
+		</tr>
+	</c:forEach>
 </table>
 
 
