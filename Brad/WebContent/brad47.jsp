@@ -8,6 +8,17 @@
 	user="root"
 	password="root"
 	/>
+<c:if test="${!empty param.account }">
+	<sql:update>
+		UPDATE cust set account=?,passwd=?,realname=? WHERE id = ?
+		<sql:param>${param.account }</sql:param>
+		<sql:param>${param.passwd }</sql:param>
+		<sql:param>${param.realname }</sql:param>
+		<sql:param>${param.updateid }</sql:param>
+	</sql:update>
+	<c:redirect url="brad45.jsp" />
+</c:if>
+
 
 <sql:query var="result">
 	SELECT * FROM cust WHERE id = ?
@@ -22,6 +33,7 @@
 </head>
 <body>
 <form action="brad47.jsp">
+	<input type="hidden" name="updateid" value="${param.editid }" />
 	Account: <input type="text" name="account" value="${result.rows[0].account }" /><br>
 	Password: <input type="password" name="passwd" value="${result.rows[0].passwd }" /><br>
 	Realname: <input type="text" name="realname" value="${result.rows[0].realname }" /><br>
