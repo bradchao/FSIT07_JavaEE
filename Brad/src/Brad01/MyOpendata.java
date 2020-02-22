@@ -1,5 +1,10 @@
 package Brad01;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +28,23 @@ public class MyOpendata {
 			PreparedStatement pstmt = 
 				conn.prepareStatement(sql);
 			
+			// --------------
+			URL url = new URL(
+				"https://data.coa.gov.tw/Service/OpenData/ODwsv/ODwsvTravelFood.aspx");
+			HttpURLConnection hconn = 
+				(HttpURLConnection)url.openConnection();
+			hconn.connect();
+			BufferedReader reader = 
+				new BufferedReader(
+					new InputStreamReader(hconn.getInputStream()));
+			String line; StringBuffer sb = new StringBuffer();
+			while ( (line = reader.readLine()) != null) {
+				sb.append(line);
+			}
 			
+			reader.close();
+			
+			// ----- parse JSON
 			
 			
 			
