@@ -1,3 +1,4 @@
+<%@page import="javax.servlet.jsp.jstl.sql.Result"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,10 +14,17 @@ SELECT * FROM opendata
 </sql:query>
 
 <c:set var="rpp" value="10" />	
+<%
+	Result result =  (Result)pageContext.getAttribute("rs1");
+	int rowCount = result.getRowCount();
+	int rpp = Integer.parseInt((String)pageContext.getAttribute("rpp"));
+	int pages = rowCount % rpp == 0 ? rowCount/rpp : rowCount/rpp+1;// int ==> Integer
+	pageContext.setAttribute("pages", pages);
+%>
 <c:set var="page" value="${param.page == null ? 1 : param.page }" />
 <c:set var="start" value="${(page - 1) * rpp }" />
 <c:set var="prev" value="${page == 1? 1 : page-1 }" />
-<c:set var="next" value="${page + 1 }" />
+<c:set var="next" value="${page == pages? page : page + 1 }" />
 
 <sql:query var="result">
 SELECT * FROM opendata limit ${start }, ${rpp }
