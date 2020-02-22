@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MyOpendata {
 	public static void main(String[] args) {
 
@@ -45,12 +48,19 @@ public class MyOpendata {
 			reader.close();
 			
 			// ----- parse JSON
+			String json = sb.toString();
+			JSONArray root = new JSONArray(json);
+			System.out.println(root.length());
 			
-			
-			
-			
-			
-			
+			for (int i=0; i<root.length(); i++) {
+				JSONObject row = root.getJSONObject(i);
+				pstmt.setString(1, row.getString("Name"));
+				pstmt.setString(2, row.getString("Address"));
+				pstmt.setString(3, row.getString("Tel"));
+				pstmt.setString(4, row.getString("Coordinate"));
+				pstmt.setString(5, row.getString("PicURL"));
+				pstmt.executeUpdate();
+			}
 			
 			System.out.println("OK");
 		}catch(Exception e) {
