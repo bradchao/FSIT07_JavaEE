@@ -8,10 +8,16 @@
 	user="root"
 	password="root"
 	/>
-	
+<sql:query var="rs1">
+SELECT * FROM opendata
+</sql:query>
+
 <c:set var="rpp" value="10" />	
 <c:set var="page" value="${param.page == null ? 1 : param.page }" />
 <c:set var="start" value="${(page - 1) * rpp }" />
+<c:set var="prev" value="${page == 1? 1 : page-1 }" />
+<c:set var="next" value="${page + 1 }" />
+
 <sql:query var="result">
 SELECT * FROM opendata limit ${start }, ${rpp }
 </sql:query>
@@ -22,7 +28,7 @@ SELECT * FROM opendata limit ${start }, ${rpp }
 <title>Insert title here</title>
 </head>
 <body>
-總筆數: ${result.rowCount }
+<a href="?page=${prev }">Prev</a> | <a href="?page=${next }">Next</a>
 <hr >
 <table border="1" width="100%">
 	<tr>
