@@ -8,8 +8,12 @@
 	user="root"
 	password="root"
 	/>
+	
+<c:set var="rpp" value="10" />	
+<c:set var="page" value="${param.page == null ? 1 : param.page }" />
+<c:set var="start" value="${(page - 1) * rpp }" />
 <sql:query var="result">
-SELECT * FROM opendata
+SELECT * FROM opendata limit ${start }, ${rpp }
 </sql:query>
 <!DOCTYPE html>
 <html>
