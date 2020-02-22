@@ -9,6 +9,14 @@
 	user="root"
 	password="root"
 	/>
+
+<c:if test="${!empty param.delid }">
+	<sql:update>
+		DELETE FROM cust WHERE id = ?
+		<sql:param>${param.delid }</sql:param>
+	</sql:update>
+</c:if>
+
 <sql:query var="result">
 SELECT * FROM cust
 </sql:query>
@@ -26,12 +34,21 @@ SELECT * FROM cust
 		<th>Id</th>
 		<th>Account</th>
 		<th>Realname</th>
+		<th>Del</th>
+		<th>Edit</th>
 	</tr>
 	<c:forEach items="${result.rows }" var="row">
 		<tr>
 			<td>${row.id }</td>
 			<td>${row.account }</td>
 			<td>${row.realname }</td>
+			<script>
+				function delConfirm(account){
+					return confirm("DELETE " + account + "?")
+				}
+			</script>
+			<td><a href='?delid=${row.id }' onclick="return delConfirm('${row.account }');">Del</a></td>
+			<td><a href='brad47.jsp?editid=${row.id }' ><button>Edit</button></a></td>
 		</tr>
 	</c:forEach>
 </table>
