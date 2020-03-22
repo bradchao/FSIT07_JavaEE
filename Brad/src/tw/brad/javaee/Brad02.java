@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/Brad02")
 public class Brad02 extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, 
+			HttpServletResponse response) throws ServletException, IOException {
 		Map<String,String[]> map = request.getParameterMap();
 		Set<String> keys = map.keySet();
 		for (String key : keys) {
